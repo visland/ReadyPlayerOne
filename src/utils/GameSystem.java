@@ -8,6 +8,6 @@ public abstract class GameSystem {
   public GameSystem(ReadyPlayerOne _g) {
     g = _g;
   }
-
+  
   abstract public void run();
 }

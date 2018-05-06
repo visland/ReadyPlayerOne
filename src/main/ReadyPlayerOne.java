@@ -1,5 +1,7 @@
 package main;
 
+import game1.CarRacing;
+import game2.SaveKira;
 import hall.Hall;
 import processing.core.PApplet;
 import utils.Const;
@@ -53,5 +55,6 @@ public class ReadyPlayerOne extends PApplet {
   }
 
   private int currPage = Const.HALL;
-  private GameSystem[] gameSystems = new GameSystem[] { new Hall(this) };
+  private GameSystem[] gameSystems = new GameSystem[] { new Hall(this), new CarRacing(this),
+      new SaveKira(this) };
 }

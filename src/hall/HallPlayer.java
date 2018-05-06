@@ -9,20 +9,16 @@ public class HallPlayer extends MovingObject {
   public HallPlayer(float _x, float _y) {
     super(_x, _y);
   }
-  
+
   @Override
   public void update() {
-    System.out.println(x);
     if (KeyInput.isLeftPressed) {
       x -= VELOCITY;
     } else if (KeyInput.isRightPressed) {
       x += VELOCITY;
     }
-    if (x >= Const.WIDTH) {
-      x -= VELOCITY;
-    } else if (x <= 0) {
-      x += VELOCITY;
-    }
+    // Makes sure x is always in the screen.
+    x = Math.max(0, Math.min(Const.WIDTH, x));
   }
 
   @Override

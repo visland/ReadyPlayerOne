@@ -13,5 +13,5 @@ public abstract class MovingObject{
   
   public static float x;
   public static float y;
-  public static float VELOCITY = 5;
+  public static double VELOCITY = 2.5;
 }

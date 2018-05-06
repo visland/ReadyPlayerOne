@@ -27,6 +27,7 @@ public class HallPlayer extends MovingObject {
 
   @Override
   public void display(PApplet g) {
-    g.ellipse(x, y, 20, 20);
+    // TODO: change it to a picture of the player.
+    g.ellipse(x, y, 20, 80);
   }
 }

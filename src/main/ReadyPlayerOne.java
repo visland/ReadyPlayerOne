@@ -1,5 +1,7 @@
 package main;
 
+import game1.CarRacing;
+import game2.SaveKira;
 import hall.Hall;
 import processing.core.PApplet;
 import utils.Const;
@@ -35,6 +37,24 @@ public class ReadyPlayerOne extends PApplet {
     KeyInput.update(key, keyCode, false);
   }
 
+  /**
+   * 
+   * @param page
+   *        The page(screen) that will change to.
+   */
+  public void changePage(int page) {
+    if (page == 0) {
+      currPage = Const.HALL;
+    } else if (page == 1) {
+      currPage = Const.CAR_RACING;
+    } else if (page == 2) {
+      currPage = Const.SAVE_KIRA;
+    } else if (page == 3) {
+      currPage = Const.MEANING_OF_GAME;
+    }
+  }
+
   private int currPage = Const.HALL;
-  private GameSystem[] gameSystems = new GameSystem[] { new Hall(this) };
+  private GameSystem[] gameSystems = new GameSystem[] { new Hall(this), new CarRacing(this),
+      new SaveKira(this) };
 }

@@ -15,7 +15,7 @@ public class Hall extends GameSystem {
     for (int i = 0; i < houses.length; i++) {
       houses[i].drawHouse(g);
       if (houses[i].inHouse(g)) {
-        g.changePage(i);
+        g.changePage(i + 1);
       }
     }
     player.update();

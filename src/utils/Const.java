@@ -2,8 +2,8 @@ package utils;
 
 public class Const {
   // Canvas property
-  public final static int WIDTH = 1200;
-  public final static int HEIGHT = 900;
+  public final static int WIDTH = 1024;
+  public final static int HEIGHT = 768;
 
   // Colors
   public final static int BLACK = 0;

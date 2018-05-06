@@ -14,7 +14,7 @@ public class Hall extends GameSystem {
     g.background(Const.WHITE);
     for (int i = 0; i < houses.length; i++) {
       houses[i].drawHouse(g);
-      if (houses[i].inHouse(g)) {
+      if (houses[i].inHouse(player)) {
         g.changePage(i + 1);
       }
     }
@@ -24,7 +24,7 @@ public class Hall extends GameSystem {
 
   private int START_X = 150;
   private int START_Y = 600;
-  HallPlayer player = new HallPlayer(START_X, START_Y);
-  HallHouse[] houses = new HallHouse[] { new HallHouse(300, 200), new HallHouse(550, 200),
+  private HallPlayer player = new HallPlayer(START_X, START_Y);
+  private HallHouse[] houses = new HallHouse[] { new HallHouse(300, 200), new HallHouse(550, 200),
       new HallHouse(800, 200) };
 }

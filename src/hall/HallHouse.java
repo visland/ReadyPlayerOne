@@ -22,9 +22,9 @@ public class HallHouse {
    * @param g
    * @return Returns true if the character is in the house.
    */
-  public boolean inHouse(ReadyPlayerOne g) {
-    if (KeyInput.isUpPressed && MovingObject.x > x + HOUSE_WIDTH / 3
-        && MovingObject.x < x + HOUSE_WIDTH / 3 + DOOR_WIDTH) {
+  public boolean inHouse(HallPlayer p) {
+    if (KeyInput.isUpPressed && p.x > x + HOUSE_WIDTH / 3
+        && p.x < x + HOUSE_WIDTH / 3 + DOOR_WIDTH) {
       return true;
     }
     return false;

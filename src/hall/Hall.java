@@ -3,7 +3,6 @@ package hall;
 import main.ReadyPlayerOne;
 import utils.Const;
 import utils.GameSystem;
-import utils.MovingObject;
 
 public class Hall extends GameSystem {
   public Hall(ReadyPlayerOne g) {
@@ -13,14 +12,19 @@ public class Hall extends GameSystem {
   @Override
   public void run() {
     g.background(Const.WHITE);
-    house.drawHouse(g);
+    for (int i = 0; i < houses.length; i++) {
+      houses[i].drawHouse(g);
+      if (houses[i].inHouse(g)) {
+        g.changePage(i);
+      }
+    }
     player.update();
     player.display(g);
-    house.inHouse(MovingObject.x, g);
   }
 
   private int START_X = 150;
   private int START_Y = 600;
   HallPlayer player = new HallPlayer(START_X, START_Y);
-  HallHouse house = new HallHouse();
+  HallHouse[] houses = new HallHouse[] { new HallHouse(300, 200), new HallHouse(550, 200),
+      new HallHouse(800, 200) };
 }

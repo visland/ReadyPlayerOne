@@ -12,13 +12,7 @@ public class HallPlayer extends MovingObject {
 
   @Override
   public void update() {
-    if (KeyInput.isLeftPressed) {
-      x -= VELOCITY;
-    } else if (KeyInput.isRightPressed) {
-      x += VELOCITY;
-    }
-    // Makes sure x is always in the screen.
-    x = Math.max(0, Math.min(Const.WIDTH, x));
+    updateX();
   }
 
   @Override

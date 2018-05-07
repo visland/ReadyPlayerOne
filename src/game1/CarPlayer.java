@@ -12,24 +12,12 @@ public class CarPlayer extends CollisionObject {
 
   @Override
   public void update() {
-    if (KeyInput.isLeftPressed) {
-      x -= VELOCITY;
-    } else if (KeyInput.isRightPressed) {
-      x += VELOCITY;
-    }
-    if (KeyInput.isUpPressed) {
-      y -= VELOCITY;
-    } else if (KeyInput.isDownPressed) {
-      y += VELOCITY;
-    }
-    // Makes sure the player is always in the screen.
-    x = Math.max(0, Math.min(Const.WIDTH, x));
-    y = Math.max(0, Math.min(Const.HEIGHT, y));
+    updateX();
+    updateY();
   }
 
   @Override
   public void display(PApplet g) {
-    g.rectMode(PApplet.CENTER);
     g.rect(x, y, 30, 30);
   }
   

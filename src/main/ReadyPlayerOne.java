@@ -2,6 +2,7 @@ package main;
 
 import game1.CarRacing;
 import game2.SaveKira;
+import game3.MeaningOfGame;
 import hall.Hall;
 import processing.core.PApplet;
 import utils.Const;
@@ -20,6 +21,7 @@ public class ReadyPlayerOne extends PApplet {
 
   @Override
   public void setup() {
+    rectMode(CENTER);
   }
 
   @Override
@@ -56,5 +58,5 @@ public class ReadyPlayerOne extends PApplet {
 
   private int currPage = Const.HALL;
   private GameSystem[] gameSystems = new GameSystem[] { new Hall(this), new CarRacing(this),
-      new SaveKira(this) };
+      new SaveKira(this), new MeaningOfGame(this) };
 }

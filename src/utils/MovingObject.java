@@ -8,7 +8,7 @@ public abstract class MovingObject {
     y = _y;
   }
 
-  protected float getDistance(MovingObject other) {
+  public float getDistance(MovingObject other) {
     return PApplet.dist(x, y, other.x, other.y);
   }
 
@@ -16,7 +16,27 @@ public abstract class MovingObject {
 
   public abstract void display(PApplet g);
 
+  protected void updateX() {
+    if (KeyInput.isLeftPressed) {
+      x -= velocity;
+    } else if (KeyInput.isRightPressed) {
+      x += velocity;
+    }
+    // Ensures the player is within the screen.
+    x = Math.max(0, Math.min(Const.WIDTH, x));
+  }
+
+  protected void updateY() {
+    if (KeyInput.isUpPressed) {
+      y -= velocity;
+    } else if (KeyInput.isDownPressed) {
+      y += velocity;
+    }
+    // Makes sure the player is always in the screen.
+    y = Math.max(0, Math.min(Const.HEIGHT, y));
+  }
+
   public float x;
   public float y;
-  public static double VELOCITY = 2.5;
+  protected float velocity = (float) 2.5;
 }

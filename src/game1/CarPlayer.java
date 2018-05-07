@@ -3,7 +3,6 @@ package game1;
 import processing.core.PApplet;
 import utils.CollisionObject;
 import utils.Const;
-import utils.KeyInput;
 
 public class CarPlayer extends CollisionObject {
   public CarPlayer(float x, float y) {
@@ -20,7 +19,7 @@ public class CarPlayer extends CollisionObject {
   public void display(PApplet g) {
     g.rect(x, y, 30, 30);
   }
-  
+
   public void reset() {
     x = Const.WIDTH / 2;
     y = Const.HEIGHT / 2;

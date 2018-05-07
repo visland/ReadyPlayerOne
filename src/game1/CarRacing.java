@@ -69,6 +69,7 @@ public class CarRacing extends GameSystem {
       g.text("Congrats! press space to keep going",200 , 200);
       if (KeyInput.isSpacePressed) {
         g.changePage(0);
+        g.isFirstPassed = true;
       }
     }
   }

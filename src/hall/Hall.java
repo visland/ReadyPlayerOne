@@ -12,14 +12,17 @@ public class Hall extends GameSystem {
 
   @Override
   public void run() {
-    g.image(bg, 0, 0);
+    g.image(bg, utils.Const.WIDTH / 2, utils.Const.HEIGHT / 2);
     if (KeyInput.isUpPressed) {
       if (inHouse1()) {
-        g.changePage(1);
-      } else if (inHouse2()) {
-        g.changePage(2);
-      } else if (inHouse3()) {
-        g.changePage(3);
+        g.changePage(utils.Const.CAR_RACING);
+      } else if (inHouse2() && g.isFirstPassed) {
+        g.changePage(utils.Const.SAVE_KIRA);
+      } else if (inHouse3() && g.isSecondPassed && g.isFirstPassed) {
+        g.changePage(utils.Const.MEANING_OF_GAME);
+      } else if ((inHouse2() && !g.isFirstPassed)
+          || inHouse3() && (!g.isSecondPassed || !g.isFirstPassed)) {
+        g.image(worngRoom, utils.Const.WIDTH / 2, utils.Const.HEIGHT / 2);
       }
     }
     player.update();
@@ -27,23 +30,26 @@ public class Hall extends GameSystem {
   }
 
   private boolean inHouse1() {
-    return player.x > 350 && player.x < 400;
+    return player.x > 320 && player.x < 430;
   }
 
   private boolean inHouse2() {
-    return player.x > 610 && player.x < 660;
+    return player.x > 580 && player.x < 690;
   }
 
   private boolean inHouse3() {
-    return player.x > 865 && player.x < 965;
+    return player.x > 835 && player.x < 995;
   }
 
   public void initBackground() {
     bg = g.loadImage("hall.jpg");
+    player.loadHallPlayer(g);
+    worngRoom = g.loadImage("wrongroom.png");
   }
 
   private PImage bg;
-  private int START_X = 150;
-  private int START_Y = 600;
+  private PImage worngRoom;
+  private int START_X = 129;
+  private int START_Y = 560;
   private HallPlayer player = new HallPlayer(START_X, START_Y);
 }

@@ -5,8 +5,7 @@ import processing.core.PApplet;
 public class KeyInput {
   /**
    * @param pressed
-   *          equals true when a specific key is pressed, false when it is
-   *          released.
+   *        equals true when a specific key is pressed, false when it is released.
    */
   public static void update(char key, int keyCode, boolean pressed) {
     switch (keyCode) {
@@ -25,12 +24,14 @@ public class KeyInput {
     }
     if (key == ' ') {
       isSpacePressed = pressed;
-    }
-    if (key == 'r') {
+    } else if (key == 'r') {
       isRPressed = pressed;
+    } else if (key == 's') {
+      isSPressed = pressed;
     }
   }
 
+  public static boolean isSPressed = false;
   public static boolean isRPressed = false;
   public static boolean isUpPressed = false;
   public static boolean isDownPressed = false;

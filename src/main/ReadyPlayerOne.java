@@ -5,6 +5,7 @@ import game2.SaveKira;
 import game3.MeaningOfGame;
 import hall.Hall;
 import processing.core.PApplet;
+import processing.core.PImage;
 import utils.Const;
 import utils.GameSystem;
 import utils.KeyInput;
@@ -22,6 +23,7 @@ public class ReadyPlayerOne extends PApplet {
   @Override
   public void setup() {
     rectMode(CENTER);
+    ((Hall) gameSystems[0]).initBackground();
   }
 
   @Override

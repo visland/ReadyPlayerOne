@@ -1,8 +1,9 @@
 package hall;
 
 import main.ReadyPlayerOne;
-import utils.Const;
+import processing.core.PImage;
 import utils.GameSystem;
+import utils.KeyInput;
 
 public class Hall extends GameSystem {
   public Hall(ReadyPlayerOne g) {
@@ -11,20 +12,38 @@ public class Hall extends GameSystem {
 
   @Override
   public void run() {
-    g.background(Const.WHITE);
-    for (int i = 0; i < houses.length; i++) {
-      houses[i].drawHouse(g);
-      if (houses[i].inHouse(player)) {
-        g.changePage(i + 1);
+    g.image(bg, 0, 0);
+    if (KeyInput.isUpPressed) {
+      if (inHouse1()) {
+        g.changePage(1);
+      } else if (inHouse2()) {
+        g.changePage(2);
+      } else if (inHouse3()) {
+        g.changePage(3);
       }
     }
     player.update();
     player.display(g);
   }
 
+  private boolean inHouse1() {
+    return player.x > 350 && player.x < 400;
+  }
+
+  private boolean inHouse2() {
+    return player.x > 610 && player.x < 660;
+  }
+
+  private boolean inHouse3() {
+    return player.x > 865 && player.x < 965;
+  }
+
+  public void initBackground() {
+    bg = g.loadImage("hall.jpg");
+  }
+
+  private PImage bg;
   private int START_X = 150;
   private int START_Y = 600;
   private HallPlayer player = new HallPlayer(START_X, START_Y);
-  private HallHouse[] houses = new HallHouse[] { new HallHouse(300, 200), new HallHouse(550, 200),
-      new HallHouse(800, 200) };
 }

@@ -26,8 +26,12 @@ public class KeyInput {
     if (key == ' ') {
       isSpacePressed = pressed;
     }
+    if (key == 'r') {
+      isRPressed = pressed;
+    }
   }
 
+  public static boolean isRPressed = false;
   public static boolean isUpPressed = false;
   public static boolean isDownPressed = false;
   public static boolean isLeftPressed = false;

@@ -16,12 +16,12 @@ public class Hall extends GameSystem {
     if (KeyInput.isUpPressed) {
       if (inHouse1()) {
         g.changePage(utils.Const.CAR_RACING);
-      } else if (inHouse2() && g.isFirstPassed) {
+      } else if (inHouse2() && g.getPassedRoom() >= 1) {
         g.changePage(utils.Const.SAVE_KIRA);
-      } else if (inHouse3() && g.isSecondPassed && g.isFirstPassed) {
+      } else if (inHouse3() && g.getPassedRoom()  >= 2) {
         g.changePage(utils.Const.MEANING_OF_GAME);
-      } else if ((inHouse2() && !g.isFirstPassed)
-          || inHouse3() && (!g.isSecondPassed || !g.isFirstPassed)) {
+      } else if ((inHouse2() && g.getPassedRoom()  < 1)
+          || inHouse3() && g.getPassedRoom()  < 2) {
         g.image(worngRoom, utils.Const.WIDTH / 2, utils.Const.HEIGHT / 2);
       }
     }

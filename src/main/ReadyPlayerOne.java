@@ -25,7 +25,7 @@ public class ReadyPlayerOne extends PApplet {
     rectMode(CENTER);
     imageMode(CENTER);
     start = loadImage("start.jpg");
-    ((Hall) gameSystems[0]).initBackground();
+    getHall().initBackground();
   }
 
   @Override
@@ -58,12 +58,23 @@ public class ReadyPlayerOne extends PApplet {
   public void changePage(int page) {
     currPage = page;
   }
+  
+  public Hall getHall() {
+    return (Hall) gameSystems[0];
+  }
+  
+  public int getPassedRoom() {
+    return numPassedRoom;
+  }
+  
+  public void addPassedRoom() {
+    numPassedRoom++;
+  }
 
   private int currPage = Const.HALL;
   private PImage start;
   private boolean hasStart = false;
-  public boolean isFirstPassed = false;
-  public boolean isSecondPassed = false;
+  private int numPassedRoom = 0;
   private GameSystem[] gameSystems = new GameSystem[] { new Hall(this), new CarRacing(this),
       new SaveKira(this), new MeaningOfGame(this) };
 }

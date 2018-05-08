@@ -26,6 +26,7 @@ public class ReadyPlayerOne extends PApplet {
     imageMode(CENTER);
     start = loadImage("start.jpg");
     getHall().initBackground();
+    getCarRacing().initBackground();
   }
 
   @Override
@@ -58,15 +59,19 @@ public class ReadyPlayerOne extends PApplet {
   public void changePage(int page) {
     currPage = page;
   }
-  
+
   public Hall getHall() {
     return (Hall) gameSystems[0];
   }
   
+  public CarRacing getCarRacing() {
+    return (CarRacing) gameSystems[1];
+  }
+
   public int getPassedRoom() {
     return numPassedRoom;
   }
-  
+
   public void addPassedRoom() {
     numPassedRoom++;
   }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import main.ReadyPlayerOne;
+import processing.core.PImage;
 import utils.Const;
 import utils.GameSystem;
 import utils.KeyInput;
@@ -17,24 +18,31 @@ public class CarRacing extends GameSystem {
   @Override
   public void run() {
     g.background(Const.WHITE);
-    player.display(g);
-    if (!isFailed) {
-      player.update();
-      updateCars();
-    }
-    for (Car car : cars) {
-      car.display(g);
-      if (car.isCollision(player)) {
-        isFailed = true;
-        fail(g);
-        if (KeyInput.isRPressed) {
-          isFailed = false;
-          refreshGame();
+    if (!gameBegan) {
+      g.image(instruction, Const.WIDTH / 2, Const.HEIGHT / 2);
+      if (KeyInput.isSPressed) {
+        gameBegan = true;
+      }
+    } else {
+      player.display(g);
+      if (!isFailed) {
+        player.update();
+        updateCars();
+      }
+      for (Car car : cars) {
+        car.display(g);
+        if (car.isCollision(player)) {
+          isFailed = true;
+          fail(g);
+          if (KeyInput.isRPressed) {
+            isFailed = false;
+            refreshGame();
+          }
         }
       }
-    }
-    if (carNum >= CAR_NUM) {
-      finishingLine();
+      if (carNum >= CAR_NUM) {
+        finishingLine();
+      }
     }
   }
 
@@ -64,9 +72,9 @@ public class CarRacing extends GameSystem {
   }
 
   private void finishingLine() {
-    g.rect(0, 0, 50, Const.HEIGHT * 2);
-    if (player.x < 50) {
-      g.text("Congrats! press space to keep going",200 , 200);
+    g.rect(0, 0, 100, Const.HEIGHT * 2);
+    if (player.x < 100) {
+      g.image(win, Const.WIDTH / 2, Const.HEIGHT / 2);
       if (KeyInput.isSpacePressed) {
         g.changePage(0);
         g.addPassedRoom();
@@ -74,6 +82,14 @@ public class CarRacing extends GameSystem {
     }
   }
 
+  public void initBackground() {
+    instruction = g.loadImage("instruction1.png");
+    win = g.loadImage("win1.png");
+  }
+
+  private PImage instruction;
+  private PImage win;
+  private boolean gameBegan = false;
   private int tick = 0;
   private int carNum = 0;
   private final int CAR_NUM = 10;

@@ -1,6 +1,7 @@
 package game3;
 
 import main.ReadyPlayerOne;
+import processing.core.PImage;
 import utils.GameSystem;
 
 final public class MeaningOfGame extends GameSystem {
@@ -12,6 +13,7 @@ final public class MeaningOfGame extends GameSystem {
   @Override
   public void run() {
     g.background(utils.Const.WHITE);
+    
     key.update();
     key.display(g);
     player.update();
@@ -43,4 +45,5 @@ final public class MeaningOfGame extends GameSystem {
 
   Key key = new Key(utils.Const.WIDTH / 2, utils.Const.HEIGHT / 2);
   Player player = new Player();
+  private PImage instruction;
 }

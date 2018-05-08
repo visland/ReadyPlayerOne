@@ -27,6 +27,8 @@ public class ReadyPlayerOne extends PApplet {
     start = loadImage("start.jpg");
     getHall().initBackground();
     getCarRacing().initBackground();
+    getSaveKira().initBackground();
+    getMeaningOfGame().initBackground();
   }
 
   @Override
@@ -63,9 +65,17 @@ public class ReadyPlayerOne extends PApplet {
   public Hall getHall() {
     return (Hall) gameSystems[0];
   }
-  
+
   public CarRacing getCarRacing() {
     return (CarRacing) gameSystems[1];
+  }
+
+  public SaveKira getSaveKira() {
+    return (SaveKira) gameSystems[2];
+  }
+
+  public MeaningOfGame getMeaningOfGame() {
+    return (MeaningOfGame) gameSystems[3];
   }
 
   public int getPassedRoom() {

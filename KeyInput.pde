@@ -1,13 +1,9 @@
-package utils;
-
-import processing.core.PApplet;
-
-public class KeyInput {
+class KeyInput {
   /**
    * @param pressed
    *        equals true when a specific key is pressed, false when it is released.
    */
-  public static void update(char key, int keyCode, boolean pressed) {
+  public void update(char key, int keyCode, boolean pressed) {
     switch (keyCode) {
       case PApplet.UP:
         isUpPressed = pressed;
@@ -31,11 +27,11 @@ public class KeyInput {
     }
   }
 
-  public static boolean isSPressed = false;
-  public static boolean isRPressed = false;
-  public static boolean isUpPressed = false;
-  public static boolean isDownPressed = false;
-  public static boolean isLeftPressed = false;
-  public static boolean isRightPressed = false;
-  public static boolean isSpacePressed = false;
+  public boolean isSPressed = false;
+  public boolean isRPressed = false;
+  public boolean isUpPressed = false;
+  public boolean isDownPressed = false;
+  public boolean isLeftPressed = false;
+  public boolean isRightPressed = false;
+  public boolean isSpacePressed = false;
 }

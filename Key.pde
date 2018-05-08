@@ -1,9 +1,7 @@
-package game3;
-
-import processing.core.PApplet;
-import utils.CollisionObject;
-
-final public class Key extends CollisionObject {
+/**
+ * The moving key in the game 3.
+ */
+final class Key extends CollisionObject {
   public Key(float x, float y) {
     super(x, y, Const.KEY_COLLISION_RADIUS);
     velocity = 2;
@@ -16,18 +14,18 @@ final public class Key extends CollisionObject {
   }
 
   @Override
-  public void display(PApplet g) {
-    g.fill(0, 0);
-    g.ellipse(x, y, 2 * Const.KEY_INNER_RADIUS, 2 * Const.KEY_INNER_RADIUS);
-    g.ellipse(x, y, 2 * Const.KEY_OUTER_RADIUS, 2 * Const.KEY_OUTER_RADIUS);
+  public void display() {
+    fill(0, 0);
+    ellipse(x, y, 2 * Const.KEY_INNER_RADIUS, 2 * Const.KEY_INNER_RADIUS);
+    ellipse(x, y, 2 * Const.KEY_OUTER_RADIUS, 2 * Const.KEY_OUTER_RADIUS);
     updateMovingDirection();
   }
 
   private void updateMovingDirection() {
-    if (y - Const.KEY_OUTER_RADIUS <= 0 || y + Const.KEY_OUTER_RADIUS > utils.Const.HEIGHT) {
+    if (y - Const.KEY_OUTER_RADIUS <= 0 || y + Const.KEY_OUTER_RADIUS > height) {
       // Hits the top or bottom
       movingDirection = -movingDirection;
-    } else if (x - Const.KEY_OUTER_RADIUS < 0 || x + Const.KEY_OUTER_RADIUS > utils.Const.WIDTH) {
+    } else if (x - Const.KEY_OUTER_RADIUS < 0 || x + Const.KEY_OUTER_RADIUS > width) {
       // Hits the left or right.
       movingDirection = Math.PI - movingDirection;
     }

@@ -1,8 +1,4 @@
-package utils;
-
-import processing.core.PApplet;
-
-public abstract class MovingObject {
+abstract class MovingObject {
   public MovingObject(float _x, float _y) {
     x = _x;
     y = _y;
@@ -14,26 +10,26 @@ public abstract class MovingObject {
 
   public abstract void update();
 
-  public abstract void display(PApplet g);
+  public abstract void display();
 
   protected void updateX() {
-    if (KeyInput.isLeftPressed) {
+    if (keyInput.isLeftPressed) {
       x -= velocity;
-    } else if (KeyInput.isRightPressed) {
+    } else if (keyInput.isRightPressed) {
       x += velocity;
     }
     // Ensures the player is within the screen.
-    x = Math.max(0, Math.min(Const.WIDTH, x));
+    x = Math.max(0, Math.min(width, x));
   }
 
   protected void updateY() {
-    if (KeyInput.isUpPressed) {
+    if (keyInput.isUpPressed) {
       y -= velocity;
-    } else if (KeyInput.isDownPressed) {
+    } else if (keyInput.isDownPressed) {
       y += velocity;
     }
     // Makes sure the player is always in the screen.
-    y = Math.max(0, Math.min(Const.HEIGHT, y));
+    y = Math.max(0, Math.min(height, y));
   }
 
   public float x;

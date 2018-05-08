@@ -1,40 +1,34 @@
-package game1;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import main.ReadyPlayerOne;
-import processing.core.PImage;
-import utils.Const;
-import utils.GameSystem;
-import utils.KeyInput;
-
-public class CarRacing extends GameSystem {
-  public CarRacing(ReadyPlayerOne g) {
-    super(g);
+class CarRacing extends GameSystem {  
+  @Override
+  public void setup() {
+    initBackground();
+    player = new CarPlayer(width / 2, height / 2);
   }
-
+  
   @Override
   public void run() {
-    g.background(Const.WHITE);
+    background(Const.WHITE);
     if (!gameBegan) {
-      g.image(instruction, Const.WIDTH / 2, Const.HEIGHT / 2);
-      if (KeyInput.isSPressed) {
+      image(instruction, width / 2, height / 2);
+      if (keyInput.isSPressed) {
         gameBegan = true;
       }
     } else {
-      player.display(g);
+      player.display();
       if (!isFailed) {
         player.update();
         updateCars();
       }
       for (Car car : cars) {
-        car.display(g);
+        car.display();
         if (car.isCollision(player)) {
           isFailed = true;
-          fail(g);
-          if (KeyInput.isRPressed) {
+          fail();
+          if (keyInput.isRPressed) {
             isFailed = false;
             refreshGame();
           }
@@ -48,14 +42,14 @@ public class CarRacing extends GameSystem {
 
   private void updateCars() {
     if (tick++ % TICKS_PER_CAR == 0 && carNum < CAR_NUM) {
-      cars.add(new Car(0, rand.nextInt(Const.HEIGHT)));
+      cars.add(new Car(0, rand.nextInt(height)));
       carNum++;
     }
     for (Car car : cars) {
       car.update();
     }
     // Removes the car if it is out of the screen.
-    if (!cars.isEmpty() && cars.get(0).x > Const.WIDTH) {
+    if (!cars.isEmpty() && cars.get(0).x > width) {
       cars.remove(0);
     }
   }
@@ -66,25 +60,25 @@ public class CarRacing extends GameSystem {
     carNum = 0;
   }
 
-  private void fail(ReadyPlayerOne g) {
-    g.text("You lose!", 200, 300);
-    g.text("Press R to restart", 300, 300);
+  private void fail() {
+    text("You lose!", 200, 300);
+    text("Press R to restart", 300, 300);
   }
 
   private void finishingLine() {
-    g.rect(0, 0, 100, Const.HEIGHT * 2);
+    rect(0, 0, 100, height * 2);
     if (player.x < 100) {
-      g.image(win, Const.WIDTH / 2, Const.HEIGHT / 2);
-      if (KeyInput.isSpacePressed) {
-        g.changePage(0);
-        g.addPassedRoom();
+      image(win, width / 2, height / 2);
+      if (keyInput.isSpacePressed) {
+        changePage(0);
+        addPassedRoom();
       }
     }
   }
 
   public void initBackground() {
-    instruction = g.loadImage("instruction1.png");
-    win = g.loadImage("win1.png");
+    instruction = loadImage("img/instruction1.png");
+    win = loadImage("img/win1.png");
   }
 
   private PImage instruction;
@@ -95,7 +89,7 @@ public class CarRacing extends GameSystem {
   private final int CAR_NUM = 10;
   private boolean isFailed = false;
   private static final int TICKS_PER_CAR = 40;
-  private CarPlayer player = new CarPlayer(Const.WIDTH / 2, Const.HEIGHT / 2);
+  private CarPlayer player;
   private List<Car> cars = new LinkedList<Car>();
   private Random rand = new Random();
 }

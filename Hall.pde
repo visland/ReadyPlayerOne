@@ -22,6 +22,9 @@ class Hall extends GameSystem {
     player.update();
     player.display();
   }
+  
+  @Override
+  protected void refreshGame() {}
 
   private boolean inHouse1() {
     return player.x > 320 && player.x < 430;

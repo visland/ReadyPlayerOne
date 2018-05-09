@@ -1,26 +1,20 @@
 class SaveKira extends GameSystem {
   @Override
-  public void setup() {}
+  public void setup() {
+    initBackground();
+  }
   
   @Override
   public void run() {
     background(Const.WHITE);
-    if (!gameBegan) {
-      image(instruction, width / 2, height / 2);
-      if (keyInput.isSPressed) {
-        gameBegan = true;
-      }
-    } else {
-
-    }
+    if (showBeginPrompt()) return;
   }
+  
+  @Override
+  protected void refreshGame() {}
 
   public void initBackground() {
-    instruction = loadImage("instruction3.png");
-    win = loadImage("win3.png");
+    instruction = loadImage("img/instruction3.png");
+    win = loadImage("img/win3.png");
   }
-
-  private PImage instruction;
-  private PImage win;
-  private boolean gameBegan = false;
 }

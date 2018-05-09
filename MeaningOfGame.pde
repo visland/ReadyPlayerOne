@@ -6,19 +6,13 @@ final class MeaningOfGame extends GameSystem {
 
   public void run() {
     background(Const.WHITE);
-    if (!gameBegun) {
-      image(instruction, width / 2, height / 2);
-      if (keyInput.isSPressed) {
-        gameBegun = true;
-      }
-    } else {
-      key.update();
-      key.display();
-      player.update();
-      player.display();
-      if (fail()) {
-        refreshGame();
-      }
+    if (showBeginPrompt()) return;
+    key.update();
+    key.display();
+    player.update();
+    player.display();
+    if (fail()) {
+      refreshGame();
     }
   }
 
@@ -31,7 +25,8 @@ final class MeaningOfGame extends GameSystem {
   }
 
   // Resets key and player.
-  private void refreshGame() {
+  @Override
+  protected void refreshGame() {
     key.x = width / 2;
     key.y = height / 2;
     initPlayerPosition();
@@ -49,5 +44,4 @@ final class MeaningOfGame extends GameSystem {
 
   Key key = new Key(0, 0);
   KeyChaser player = new KeyChaser();
-  private boolean gameBegun = false;
 }

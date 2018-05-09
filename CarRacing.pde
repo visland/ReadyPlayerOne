@@ -12,31 +12,23 @@ class CarRacing extends GameSystem {
   @Override
   public void run() {
     background(Const.WHITE);
-    if (!gameBegan) {
-      image(instruction, width / 2, height / 2);
-      if (keyInput.isSPressed) {
-        gameBegan = true;
+    if (showBeginPrompt()) return;
+    player.display();
+    for (Car car : cars) {
+      car.display();
+    }
+    if (showFailPrompt()) return;
+    if (!fail) {
+      player.update();
+      updateCars();
+    }
+    for (Car car : cars) {
+      if (car.isCollision(player)) {
+        fail = true;
       }
-    } else {
-      player.display();
-      if (!isFailed) {
-        player.update();
-        updateCars();
-      }
-      for (Car car : cars) {
-        car.display();
-        if (car.isCollision(player)) {
-          isFailed = true;
-          fail();
-          if (keyInput.isRPressed) {
-            isFailed = false;
-            refreshGame();
-          }
-        }
-      }
-      if (carNum >= CAR_NUM) {
-        finishingLine();
-      }
+    }
+    if (carNum >= CAR_NUM) {
+      finishingLine();
     }
   }
 
@@ -54,15 +46,11 @@ class CarRacing extends GameSystem {
     }
   }
 
-  private void refreshGame() {
+  @Override
+  protected void refreshGame() {
     cars.clear();
     player.reset();
     carNum = 0;
-  }
-
-  private void fail() {
-    text("You lose!", 200, 300);
-    text("Press R to restart", 300, 300);
   }
 
   private void finishingLine() {
@@ -81,13 +69,9 @@ class CarRacing extends GameSystem {
     win = loadImage("img/win1.png");
   }
 
-  private PImage instruction;
-  private PImage win;
-  private boolean gameBegan = false;
   private int tick = 0;
   private int carNum = 0;
   private final int CAR_NUM = 10;
-  private boolean isFailed = false;
   private static final int TICKS_PER_CAR = 40;
   private CarPlayer player;
   private List<Car> cars = new LinkedList<Car>();

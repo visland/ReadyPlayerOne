@@ -28,4 +28,5 @@ class Const {
   public static final float KEY_OUTER_RADIUS = 180;
   public static final float KEY_COLLISION_RADIUS = 25;
   public static final float GAME3_PLAYER_COLLISION_RADIUS = 10;
+  public static final float SNACK_COLLISION_RADIUS = 20;
 }

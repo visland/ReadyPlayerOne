@@ -18,10 +18,8 @@ class CarRacing extends GameSystem {
       car.display();
     }
     if (showFailPrompt()) return;
-    if (!fail) {
-      player.update();
-      updateCars();
-    }
+    player.update();
+    updateCars();
     for (Car car : cars) {
       if (car.isCollision(player)) {
         fail = true;

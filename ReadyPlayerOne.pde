@@ -2,6 +2,7 @@ public void setup() {
   size(1024, 768);
   rectMode(CENTER);
   imageMode(CENTER);
+  colorMode(RGB, 255);
   start = loadImage("img/start.jpg");
   for (GameSystem gameSystem: gameSystems) {
     gameSystem.setup();

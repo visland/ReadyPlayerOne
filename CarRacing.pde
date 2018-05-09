@@ -75,3 +75,49 @@ class CarRacing extends GameSystem {
   private List<Car> cars = new LinkedList<Car>();
   private Random rand = new Random();
 }
+
+/**
+ * The cars in game 1.
+ */
+public class Car extends CollisionObject {
+  public Car(float x, float y) {
+    super(x, y, Const.CAR_COLLISION_RADIUS);
+  }
+
+  @Override
+  public void update() {
+    x += CAR_VELOCITY;
+  }
+
+  @Override
+  public void display() {
+    ellipse(x, y, Const.CAR_WIDTH, Const.CAR_WIDTH);
+  }
+
+  private float CAR_VELOCITY = (float) 2.5;
+}
+
+/**
+ * The player in game 1.
+ */
+public class CarPlayer extends CollisionObject {
+  public CarPlayer(float x, float y) {
+    super(x, y, Const.PLAYER_COLLISION_RADIUS);
+  }
+
+  @Override
+  public void update() {
+    updateX();
+    updateY();
+  }
+
+  @Override
+  public void display() {
+    g.rect(x, y, 30, 30);
+  }
+
+  public void reset() {
+    x = width / 2;
+    y = height / 2;
+  }
+}

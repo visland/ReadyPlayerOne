@@ -80,3 +80,83 @@ final class MeaningOfGame extends GameSystem {
   private static final int SNACK_SZ = 3;
   private ArrayList<Snack> snacks = new ArrayList<Snack>();
 }
+
+/**
+ * The moving key in game 3.
+ */
+final class Key extends CollisionObject {
+  public Key(float x, float y) {
+    super(x, y, Const.KEY_COLLISION_RADIUS);
+    velocity = 2;
+  }
+
+  @Override
+  public void update() {
+    x += velocity * Math.cos(movingDirection);
+    y += velocity * -Math.sin(movingDirection);
+  }
+
+  @Override
+  public void display() {
+    fill(0, 0);
+    ellipse(x, y, 2 * Const.KEY_INNER_RADIUS, 2 * Const.KEY_INNER_RADIUS);
+    ellipse(x, y, 2 * Const.KEY_OUTER_RADIUS, 2 * Const.KEY_OUTER_RADIUS);
+    updateMovingDirection();
+  }
+
+  private void updateMovingDirection() {
+    if (y - Const.KEY_OUTER_RADIUS <= 0 || y + Const.KEY_OUTER_RADIUS > height) {
+      // Hits the top or bottom
+      movingDirection = -movingDirection;
+    } else if (x - Const.KEY_OUTER_RADIUS < 0 || x + Const.KEY_OUTER_RADIUS > width) {
+      // Hits the left or right.
+      movingDirection = Math.PI - movingDirection;
+    }
+  }
+  
+  public double getMovingDirection() {
+    return movingDirection;
+  }
+
+  private double movingDirection = Math.PI * .6;
+}
+
+/**
+ * The player in game 3.
+ */
+final class KeyChaser extends CollisionObject {
+  public KeyChaser() {
+    super(0, 0, Const.PLAYER_COLLISION_RADIUS);    
+  }
+
+  @Override
+  public void update() {
+    updateX();
+    updateY();
+  }
+
+  @Override
+  public void display() {
+    fill(200, 0, 0);
+    ellipse(x, y, Const.PLAYER_COLLISION_RADIUS * 2, Const.PLAYER_COLLISION_RADIUS * 2);
+  }
+}
+
+/**
+ * Snacks in game 3.
+ */
+class Snack extends CollisionObject {
+  Snack(float x, float y) {
+    super(x, y, Const.SNACK_COLLISION_RADIUS);
+  }
+
+  // Does nothing because snack is NOT supposed to move.
+  @Override
+  public void update() {}
+
+  @Override
+  public void display() {
+    fill(#FCFC12);
+    ellipse(x, y, Const.SNACK_COLLISION_RADIUS * 2, Const.SNACK_COLLISION_RADIUS * 2);
+  }
+}

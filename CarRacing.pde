@@ -10,24 +10,35 @@ class CarRacing extends GameSystem {
   }
   
   @Override
-  public void run() {
-    background(Const.WHITE);
-    if (showBeginPrompt()) return;
+  protected void display() {
     player.display();
     for (Car car : cars) {
       car.display();
     }
-    if (showFailPrompt()) return;
+  }
+  
+  @Override
+  protected void update() {
     player.update();
     updateCars();
-    for (Car car : cars) {
+    if (carNum >= CAR_NUM) {
+      rect(0, 0, 100, height * 2);
+    }
+  }
+  
+  @Override
+  protected boolean fail() {
+    for (Car car: cars) {
       if (car.isCollision(player)) {
-        fail = true;
+        return true;
       }
     }
-    if (carNum >= CAR_NUM) {
-      finishingLine();
-    }
+    return false;
+  }
+  
+  @Override
+  protected boolean succeed() {
+    return carNum >= CAR_NUM && player.x < 100;
   }
 
   private void updateCars() {
@@ -49,17 +60,6 @@ class CarRacing extends GameSystem {
     cars.clear();
     player.reset();
     carNum = 0;
-  }
-
-  private void finishingLine() {
-    rect(0, 0, 100, height * 2);
-    if (player.x < 100) {
-      image(win, width / 2, height / 2);
-      if (keyInput.isSpacePressed) {
-        changePage(0);
-        addPassedRoom();
-      }
-    }
   }
 
   public void initBackground() {

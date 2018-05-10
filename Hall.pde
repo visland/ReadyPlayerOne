@@ -25,6 +25,14 @@ class Hall extends GameSystem {
   
   @Override
   protected void refreshGame() {}
+  @Override
+  protected boolean fail() { return false; }
+  @Override
+  protected boolean succeed() { return false; }
+  @Override
+  protected void display() {}
+  @Override
+  protected void update() {}
 
   private boolean inHouse1() {
     return player.x > 320 && player.x < 430;

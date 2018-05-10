@@ -5,34 +5,6 @@ final class MeaningOfGame extends GameSystem {
     refreshGame();
   }
 
-  @Override
-  public void run() {
-    background(Const.WHITE);
-    if (showBeginPrompt()) return;
-    key.display();
-    player.display();      
-    for (Snack snack : snacks) {
-      snack.display();
-    }
-    if (showFailPrompt()) return;
-    if (succeed()) {
-      image(win, width / 2, height / 2);
-      if (keyInput.isSpacePressed) {
-        changePage(Const.HALL);
-        addPassedRoom();
-      }
-      return;  // Do NOT execute below code when the player wins.
-    }
-    key.update();
-    player.update();
-    for (int i = snacks.size() - 1; i >= 0; -- i) {
-      if (player.isCollision(snacks.get(i))) {
-        snacks.remove(i);
-      }
-    }
-    fail = fail();
-  }
-
   // Initializes player's position.
   private void initPlayerPosition() {
     float radius = (Const.KEY_INNER_RADIUS + Const.KEY_OUTER_RADIUS) / 2;
@@ -41,7 +13,7 @@ final class MeaningOfGame extends GameSystem {
     player.y = (float) (key.y + radius * -Math.sin(movingDirection));
   }
 
-  // Resets key and player.
+  // Resets key, player and snacks.
   @Override
   protected void refreshGame() {
     // Initializes key position
@@ -51,17 +23,38 @@ final class MeaningOfGame extends GameSystem {
     initSnacks();
   }
 
-  private boolean fail() {
+  @Override
+  protected boolean fail() {
     return (player.isCollision(key) && !snacks.isEmpty()) ||
            player.getDistance(key) >= Const.KEY_OUTER_RADIUS - Const.PLAYER_COLLISION_RADIUS;
   }
 
-  private boolean succeed() {
+  @Override
+  protected boolean succeed() {
     return player.isCollision(key) && snacks.isEmpty();
   }
+  
+  @Override
+  protected void display() {
+    key.display();
+    player.display();      
+    for (Snack snack : snacks) {
+      snack.display();
+    }
+  }
 
-  private void initBackground() {
-    println("hi");
+  @Override
+  protected void update() {
+    key.update();
+    player.update();
+    for (int i = snacks.size() - 1; i >= 0; -- i) {
+      if (player.isCollision(snacks.get(i))) {
+        snacks.remove(i);
+      }
+    }
+  }
+
+  public void initBackground() {
     instruction = loadImage("img/instruction2.png");
     win = loadImage("img/win2.png");
   }

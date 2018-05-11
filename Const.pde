@@ -20,6 +20,9 @@ class Const {
   /**
    * Game 2
    */
+  public static final int NUM_BLOCK = 10;
+  public static final int BLOCK_LENGTH = 50;
+  public static final int STICK_WIDTH = 4;
 
   /**
    * Game 3

@@ -21,8 +21,9 @@ class Const {
    * Game 2
    */
   public static final int NUM_BLOCK = 10;
-  public static final int BLOCK_LENGTH = 50;
+  public static final int BLOCK_LENGTH = 80;
   public static final int STICK_WIDTH = 4;
+  public static final int SUCCEED_BAR_NUM = 2;
 
   /**
    * Game 3

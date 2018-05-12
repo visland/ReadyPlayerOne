@@ -1,8 +1,8 @@
 abstract class GameSystem {
   public void run() {
     background(Const.WHITE);
-    if (showBeginPrompt()) return;
     display();
+    if (showBeginPrompt()) return;
     if (showFailPrompt()) return;
     if (showSucceedPrompt()) return;
     update();

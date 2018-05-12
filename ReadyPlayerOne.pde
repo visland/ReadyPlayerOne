@@ -29,7 +29,6 @@ public void keyReleased() {
 }
 
 /**
- * 
  * @param page
  *        The page(screen) that will change to.
  */

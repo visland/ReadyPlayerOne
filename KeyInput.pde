@@ -35,3 +35,4 @@ class KeyInput {
   public boolean isRightPressed = false;
   public boolean isSpacePressed = false;
 }
+

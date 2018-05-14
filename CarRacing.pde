@@ -7,10 +7,15 @@ class CarRacing extends GameSystem {
   public void setup() {
     initBackground();
     player = new CarPlayer(width / 2, height / 2);
+    player.setup();
+    for (int i = 0; i < CAR_IMGS.length; i++) {
+      CAR_IMGS[i] = loadImage("img/game1/" + i + ".png");
+    }
   }
   
   @Override
   protected void display() {
+    image(background, width / 2, height /2 );
     player.display();
     for (Car car : cars) {
       car.display();
@@ -22,7 +27,7 @@ class CarRacing extends GameSystem {
     player.update();
     updateCars();
     if (carNum >= CAR_NUM) {
-      rect(0, 0, 100, height * 2);
+      image(finishingLine, width / 2, height /2 );
     }
   }
   
@@ -38,12 +43,12 @@ class CarRacing extends GameSystem {
   
   @Override
   protected boolean succeed() {
-    return carNum >= CAR_NUM && player.x < 100;
+    return carNum >= CAR_NUM && player.x < 180;
   }
 
   private void updateCars() {
     if (tick++ % TICKS_PER_CAR == 0 && carNum < CAR_NUM) {
-      cars.add(new Car(0, rand.nextInt(height)));
+      cars.add(new Car(0, random(height), CAR_IMGS[(int)random(0, CAR_IMGS.length)]));
       carNum++;
     }
     for (Car car : cars) {
@@ -65,6 +70,9 @@ class CarRacing extends GameSystem {
   public void initBackground() {
     instruction = loadImage("img/instruction1.png");
     win = loadImage("img/win1.png");
+    lose = loadImage("img/lose.png");
+    background = loadImage("img/game1/bg.png");
+    finishingLine = loadImage("img/game1/line.png");
   }
 
   private int tick = 0;
@@ -73,17 +81,19 @@ class CarRacing extends GameSystem {
   private static final int TICKS_PER_CAR = 40;
   private CarPlayer player;
   private List<Car> cars = new LinkedList<Car>();
-  private Random rand = new Random();
+  private PImage[] CAR_IMGS = new PImage[5];
+  private PImage finishingLine;
 }
 
 /**
  * The cars in game 1.
  */
 public class Car extends CollisionObject {
-  public Car(float x, float y) {
+  public Car(float x, float y, PImage img) {
     super(x, y, Const.CAR_COLLISION_RADIUS);
+    carImg = img;
   }
-
+  
   @Override
   public void update() {
     x += CAR_VELOCITY;
@@ -91,10 +101,11 @@ public class Car extends CollisionObject {
 
   @Override
   public void display() {
-    ellipse(x, y, Const.CAR_WIDTH, Const.CAR_WIDTH);
+    image(carImg, x, y, Const.CAR_LENGTH, Const.CAR_WIDTH);
   }
 
-  private float CAR_VELOCITY = (float) 2.5;
+  private PImage carImg;
+  private float CAR_VELOCITY = (float) 2.5;  
 }
 
 /**
@@ -103,6 +114,10 @@ public class Car extends CollisionObject {
 public class CarPlayer extends CollisionObject {
   public CarPlayer(float x, float y) {
     super(x, y, Const.PLAYER_COLLISION_RADIUS);
+  }
+  
+  public void setup() {
+    carPlayer = loadImage("img/game1/player.png");
   }
 
   @Override
@@ -113,11 +128,13 @@ public class CarPlayer extends CollisionObject {
 
   @Override
   public void display() {
-    g.rect(x, y, 30, 30);
+    image(carPlayer, x, y, Const.PLAYER_LENGTH, Const.PLAYER_WIDTH);
   }
 
   public void reset() {
     x = width / 2;
     y = height / 2;
   }
+  
+  PImage carPlayer = new PImage();
 }

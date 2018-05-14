@@ -57,8 +57,7 @@ abstract class GameSystem {
   protected final boolean showFailPrompt() {
     boolean result = fail;
     if (result) {
-      text("You lose!", 200, 300);
-      text("Press R to restart", 300, 300);
+      image(lose, width / 2, height / 2);
       if (keyInput.isRPressed) {
         fail = false;
         refreshGame();
@@ -93,6 +92,8 @@ abstract class GameSystem {
 
   protected PImage instruction;
   protected PImage win;
+  protected PImage lose;
+  protected PImage background;
   private boolean begin = false;
   private boolean fail = false;
   private boolean succeed = false;

@@ -57,6 +57,7 @@ final class MeaningOfGame extends GameSystem {
   public void initBackground() {
     instruction = loadImage("img/instruction2.png");
     win = loadImage("img/win2.png");
+    lose = loadImage("img/lose.png");
   }
 
   private void initSnacks() {

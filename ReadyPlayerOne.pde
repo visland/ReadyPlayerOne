@@ -44,7 +44,7 @@ public void addPassedRoom() {
   numPassedRoom++;
 }
 
-private int currPage = Const.SAVE_KIRA;
+private int currPage = Const.HALL;
 private PImage start;
 private boolean hasStart = false;
 private int numPassedRoom = 0;

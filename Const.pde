@@ -12,10 +12,12 @@ class Const {
   /**
    * Game 1
    */
-  public static final float CAR_WIDTH = 25;
-  public static final float CAR_COLLISION_RADIUS = CAR_WIDTH / 2;
-  public static final float PLAYER_WIDTH = 20;
-  public static final float PLAYER_COLLISION_RADIUS = PLAYER_WIDTH / 2;
+  public static final float CAR_WIDTH = 80;
+  public static final float CAR_LENGTH = 100;
+  public static final float CAR_COLLISION_RADIUS = CAR_LENGTH / 2;
+  public static final float PLAYER_WIDTH = 80;
+  public static final float PLAYER_LENGTH = 100;
+  public static final float PLAYER_COLLISION_RADIUS = CAR_WIDTH / 2;
 
   /**
    * Game 2

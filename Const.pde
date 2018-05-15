@@ -15,8 +15,8 @@ class Const {
   public static final float CAR_WIDTH = 80;
   public static final float CAR_LENGTH = 100;
   public static final float CAR_COLLISION_RADIUS = CAR_LENGTH / 2;
-  public static final float PLAYER_WIDTH = 80;
-  public static final float PLAYER_LENGTH = 100;
+  public static final float PLAYER_WIDTH = 70;
+  public static final float PLAYER_LENGTH = 86;
   public static final float PLAYER_COLLISION_RADIUS = CAR_WIDTH / 2;
 
   /**
@@ -30,9 +30,9 @@ class Const {
   /**
    * Game 3
    */
-  public static final float KEY_INNER_RADIUS = 25;
-  public static final float KEY_OUTER_RADIUS = 180;
-  public static final float KEY_COLLISION_RADIUS = 25;
-  public static final float GAME3_PLAYER_COLLISION_RADIUS = 10;
-  public static final float SNACK_COLLISION_RADIUS = 20;
+  public static final float KEY_INNER_RADIUS = 50;
+  public static final float KEY_OUTER_RADIUS = 280;
+  public static final float KEY_COLLISION_RADIUS = KEY_INNER_RADIUS;
+  public static final float GAME3_PLAYER_COLLISION_RADIUS = 20;
+  public static final float SNACK_COLLISION_RADIUS = 40;
 }

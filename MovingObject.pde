@@ -34,5 +34,5 @@ abstract class MovingObject {
 
   public float x;
   public float y;
-  protected float velocity = (float) 2.5;
+  protected float velocity = (float) 3.2;
 }

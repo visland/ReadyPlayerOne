@@ -2,7 +2,12 @@ final class MeaningOfGame extends GameSystem {
   @Override
   public void setup() {
     initBackground();
+    for (int i = 0; i < SNACK_IMGS.length; i++) {
+      SNACK_IMGS[i] = loadImage("img/game3/" + i + ".png");
+    }
     refreshGame();
+    key.setup();
+    player.setup();
   }
 
   // Initializes player's position.
@@ -36,6 +41,7 @@ final class MeaningOfGame extends GameSystem {
   
   @Override
   protected void display() {
+    image(background, width / 2, height / 2);
     key.display();
     player.display();      
     for (Snack snack : snacks) {
@@ -58,21 +64,23 @@ final class MeaningOfGame extends GameSystem {
     instruction = loadImage("img/instruction2.png");
     win = loadImage("img/win2.png");
     lose = loadImage("img/lose.png");
+    background = loadImage("img/game3/bg.png");
   }
 
   private void initSnacks() {
     // Initializes snacks
     snacks.clear();
-    for (int i = 0; i < SNACK_SZ; ++i) {
-      snacks.add(new Snack(random(Const.KEY_OUTER_RADIUS, width - Const.KEY_OUTER_RADIUS), 
-                           random(Const.KEY_OUTER_RADIUS, height - Const.KEY_OUTER_RADIUS)));
+    for (int i = 0; i < SNACK_SZ; i++) {
+      snacks.add(new Snack(random(Const.SNACK_COLLISION_RADIUS, width - Const.SNACK_COLLISION_RADIUS), 
+                           random(Const.SNACK_COLLISION_RADIUS, height - Const.SNACK_COLLISION_RADIUS), SNACK_IMGS[i]));
     }
   }
 
   private Key key = new Key(0, 0);
   private KeyChaser player = new KeyChaser();
-  private static final int SNACK_SZ = 3;
+  private static final int SNACK_SZ = 6;
   private ArrayList<Snack> snacks = new ArrayList<Snack>();
+  private PImage[] SNACK_IMGS = new PImage[6];
 }
 
 /**
@@ -82,6 +90,11 @@ final class Key extends CollisionObject {
   public Key(float x, float y) {
     super(x, y, Const.KEY_COLLISION_RADIUS);
     velocity = 2;
+  }
+  
+  public void setup() {
+    keyImg = loadImage("img/game3/key.png");
+    circle = loadImage("img/game3/circle.png");
   }
 
   @Override
@@ -93,8 +106,8 @@ final class Key extends CollisionObject {
   @Override
   public void display() {
     fill(0, 0);
-    ellipse(x, y, 2 * Const.KEY_INNER_RADIUS, 2 * Const.KEY_INNER_RADIUS);
-    ellipse(x, y, 2 * Const.KEY_OUTER_RADIUS, 2 * Const.KEY_OUTER_RADIUS);
+    image(circle, x, y, 2 * Const.KEY_OUTER_RADIUS, 2 * Const.KEY_OUTER_RADIUS);
+    image(keyImg, x, y, 2 * Const.KEY_INNER_RADIUS, 2 * Const.KEY_INNER_RADIUS);
     updateMovingDirection();
   }
 
@@ -113,6 +126,8 @@ final class Key extends CollisionObject {
   }
 
   private double movingDirection = Math.PI * .6;
+  private PImage keyImg;
+  private PImage circle;
 }
 
 /**
@@ -121,6 +136,10 @@ final class Key extends CollisionObject {
 final class KeyChaser extends CollisionObject {
   public KeyChaser() {
     super(0, 0, Const.PLAYER_COLLISION_RADIUS);    
+  }
+  
+  public void setup() {
+    chaser = loadImage("img/game3/player.png");
   }
 
   @Override
@@ -131,17 +150,19 @@ final class KeyChaser extends CollisionObject {
 
   @Override
   public void display() {
-    fill(200, 0, 0);
-    ellipse(x, y, Const.PLAYER_COLLISION_RADIUS * 2, Const.PLAYER_COLLISION_RADIUS * 2);
+    image(chaser, x, y, Const.PLAYER_COLLISION_RADIUS * 2, Const.PLAYER_COLLISION_RADIUS * 2);
   }
+  
+  private PImage chaser;
 }
 
 /**
  * Snacks in game 3.
  */
 class Snack extends CollisionObject {
-  Snack(float x, float y) {
+  Snack(float x, float y, PImage _img) {
     super(x, y, Const.SNACK_COLLISION_RADIUS);
+    img = _img;
   }
 
   // Does nothing because snack is NOT supposed to move.
@@ -150,7 +171,8 @@ class Snack extends CollisionObject {
 
   @Override
   public void display() {
-    fill(#FCFC12);
-    ellipse(x, y, Const.SNACK_COLLISION_RADIUS * 2, Const.SNACK_COLLISION_RADIUS * 2);
+    image(img, x, y, Const.SNACK_COLLISION_RADIUS * 2, Const.SNACK_COLLISION_RADIUS * 2);
   }
+
+  private PImage img;
 }

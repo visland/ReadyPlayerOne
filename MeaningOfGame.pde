@@ -42,11 +42,11 @@ final class MeaningOfGame extends GameSystem {
   @Override
   protected void display() {
     image(background, width / 2, height / 2);
-    key.display();
-    player.display();      
     for (Snack snack : snacks) {
       snack.display();
     }
+    key.display();
+    player.display();      
   }
 
   @Override
@@ -71,8 +71,8 @@ final class MeaningOfGame extends GameSystem {
     // Initializes snacks
     snacks.clear();
     for (int i = 0; i < SNACK_SZ; i++) {
-      snacks.add(new Snack(random(Const.SNACK_COLLISION_RADIUS, width - Const.SNACK_COLLISION_RADIUS), 
-                           random(Const.SNACK_COLLISION_RADIUS, height - Const.SNACK_COLLISION_RADIUS), SNACK_IMGS[i]));
+      snacks.add(new Snack(random(Const.SNACK_COLLISION_RADIUS + 50, width - Const.SNACK_COLLISION_RADIUS - 50), 
+                           random(Const.SNACK_COLLISION_RADIUS + 50, height - Const.SNACK_COLLISION_RADIUS - 50), SNACK_IMGS[i]));
     }
   }
 

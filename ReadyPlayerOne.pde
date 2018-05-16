@@ -4,6 +4,7 @@ public void setup() {
   imageMode(CENTER);
   colorMode(RGB, 255);
   start = loadImage("img/start.jpg");
+  finish = loadImage("img/finish.png");
   for (GameSystem gameSystem: gameSystems) {
     gameSystem.setup();
   }
@@ -17,6 +18,9 @@ public void draw() {
     }
   } else {
     gameSystems[currPage].run();
+  }
+  if (numPassedRoom == 3) {
+    image(finish, width / 2, height / 2);
   }
 }
 
@@ -46,6 +50,7 @@ public void addPassedRoom() {
 
 private int currPage = Const.HALL;
 private PImage start;
+private PImage finish;
 private boolean hasStart = false;
 private int numPassedRoom = 0;
 private GameSystem[] gameSystems = new GameSystem[] { new Hall(), new CarRacing(), 

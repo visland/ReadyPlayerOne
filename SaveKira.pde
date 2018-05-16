@@ -23,8 +23,9 @@ class SaveKira extends GameSystem {
   
   @Override
   protected void display() {
+    image(background, width / 2, height / 2);
     bar.display();
-    dancer.display(bar.getIndex());
+    dancer.display(bar.getKey());
   }
   
   @Override
@@ -36,6 +37,7 @@ class SaveKira extends GameSystem {
     instruction = loadImage("img/instruction2.png");
     win = loadImage("img/win2.png");
     lose = loadImage("img/lose.png");
+    background = loadImage("img/game2/bg.png");
   }
   
   private Dancer dancer = new Dancer();
@@ -59,15 +61,19 @@ public class Bar {
     int currDirection = blockDirections[getIndex()];
     if (keyInput.isUpPressed) {
       hitKey = true;
+      keyNum = 0;
       return currDirection == 0;
     } else if (keyInput.isDownPressed) {
       hitKey = true;
+      keyNum = 1;
       return currDirection == 1;
     } else if (keyInput.isLeftPressed) {
       hitKey = true;
+      keyNum = 2;
       return currDirection == 2;
     } else if (keyInput.isRightPressed) {
       hitKey = true;
+      keyNum = 3;
       return currDirection == 3;
     } else {
       return true;
@@ -157,7 +163,12 @@ public class Bar {
     renewBar();
   }
   
-    private boolean hitKey = false;
+  public int getKey() {
+    return keyNum;
+  }
+  
+  private int keyNum;
+  private boolean hitKey = false;
   private int barNum;
   private int prevBlockIdx = 0;
   private float velocity = (float)2.5;
@@ -173,13 +184,15 @@ public class Bar {
 
 public class Dancer {
   public void setup() {
-    imgs[0] = loadImage("img/left.png");
-    imgs[1] = loadImage("img/right.png");
+    imgs[0] = loadImage("img/game2/up.png");
+    imgs[1] = loadImage("img/game2/down.png");
+    imgs[2] = loadImage("img/game2/left.png");
+    imgs[3] = loadImage("img/game2/right.png");
   }
   
   public void display(int idx) {
-    image(imgs[idx % imgs.length], width / 2, height / 2);
+    image(imgs[idx], width / 2, height / 2);
   }
    
-  private PImage[] imgs = new PImage[2];
+  private PImage[] imgs = new PImage[4];
 }

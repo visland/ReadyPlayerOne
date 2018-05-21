@@ -76,7 +76,7 @@ class CarRacing extends GameSystem {
 
   private int tick = 0;
   private int carNum = 0;
-  private final int CAR_NUM = 25;
+  private final int CAR_NUM = 40;
   private static final int TICKS_PER_CAR = 40;
   private CarPlayer player;
   private List<Car> cars = new LinkedList<Car>();

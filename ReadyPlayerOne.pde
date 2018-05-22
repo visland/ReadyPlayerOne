@@ -1,8 +1,12 @@
+import ddf.minim.*;
+
 public void setup() {
   size(1024, 768);
   rectMode(CENTER);
   imageMode(CENTER);
   colorMode(RGB, 255);
+  minim = new Minim(this);
+  startPage = minim.loadFile("sound/hall.mp3");
   start = loadImage("img/start.jpg");
   finish = loadImage("img/finish.png");
   // Sets up all the games.
@@ -18,9 +22,11 @@ public void setup() {
  */
 public void draw() {
   if (!hasStart) {
+    startPage.play();
     image(start, width / 2, height / 2);
     if (keyInput.isSPressed) {
       hasStart = true;
+      startPage.pause();
     }
   } else {
     gameSystems[currPage].run();
@@ -54,6 +60,8 @@ public void addPassedRoom() {
   numPassedRoom++;
 }
 
+protected Minim minim;
+private AudioPlayer startPage;
 private int currPage = Const.HALL;
 private PImage start;
 private PImage finish;

@@ -1,22 +1,28 @@
 /**
  * The game hall where player can access to three different games.
  */
+
 class Hall extends GameSystem {
   @Override
   public void setup() {
+    initSound();
     initBackground();
   }
   
   @Override
   public void run() {
+    bgMusic.play();
     image(bg, width / 2, height / 2);
     // Determines if the player enters a room successfully.
     if (keyInput.isUpPressed) {
       if (inHouse1()) {
+        bgMusic.pause();
         changePage(Const.CAR_RACING);
       } else if (inHouse2() && getPassedRoom() >= 1) {
+        bgMusic.pause();
         changePage(Const.SAVE_KIRA);
       } else if (inHouse3() && getPassedRoom()  >= 2) {
+        bgMusic.pause();
         changePage(Const.MEANING_OF_GAME);
       } else if ((inHouse2() && getPassedRoom()  < 1)
           || inHouse3() && getPassedRoom()  < 2) {
@@ -58,6 +64,10 @@ class Hall extends GameSystem {
     bg = loadImage("img/hall.jpg");
     player.loadHallPlayer();
     worngRoom = loadImage("img/wrongroom.png");
+  }
+  
+  public void initSound() {
+    bgMusic = minim.loadFile("sound/hall.mp3");
   }
 
   private PImage bg;

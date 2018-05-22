@@ -7,6 +7,7 @@ import java.util.List;
 class CarRacing extends GameSystem {  
   @Override
   public void setup() {
+    initSound();
     initBackground();
     player = new CarPlayer(width / 2, height / 2);
     player.setup();
@@ -77,6 +78,10 @@ class CarRacing extends GameSystem {
     lose = loadImage("img/lose.png");
     background = loadImage("img/game1/bg.png");
     finishingLine = loadImage("img/game1/line.png");
+  }
+  
+  public void initSound() {
+    bgMusic = minim.loadFile("sound/car.mp3");
   }
 
   private int carNum = 0;

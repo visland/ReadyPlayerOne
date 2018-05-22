@@ -8,6 +8,7 @@ abstract class GameSystem {
    * If the user fails/ succeeds, show fail/ succeed prompt and stop updating.
    */
   public void run() {
+    bgMusic.play();
     display();
     if (showBeginPrompt()) return;
     if (showFailPrompt()) return;
@@ -19,7 +20,7 @@ abstract class GameSystem {
   
   /**
    * Basic method that is ran in basic setup() method.
-   * Initialized images and musics in this method.
+   * Initialized images and musics in sthis method.
    */
   abstract public void setup();
   abstract protected void refreshGame();
@@ -86,6 +87,7 @@ abstract class GameSystem {
     if (succeed) {
       image(win, width / 2, height / 2);
       if (keyInput.isSpacePressed) {
+        bgMusic.pause();
         changePage(0);
         addPassedRoom();
       }
@@ -104,6 +106,7 @@ abstract class GameSystem {
   protected PImage instruction;
   protected PImage win;
   protected PImage lose;
+  protected AudioPlayer bgMusic;
   protected PImage background;
   private boolean begin = false;
   private boolean fail = false;

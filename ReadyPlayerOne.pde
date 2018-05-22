@@ -5,11 +5,17 @@ public void setup() {
   colorMode(RGB, 255);
   start = loadImage("img/start.jpg");
   finish = loadImage("img/finish.png");
+  // Sets up all the games.
   for (GameSystem gameSystem: gameSystems) {
     gameSystem.setup();
   }
 }
 
+/**
+ * The game starts with a start prompt. User presses 's' to start the game and 
+ * go to the game hall. After the player passed all three games, the victory
+ * prompt will be shown.
+ */
 public void draw() {
   if (!hasStart) {
     image(start, width / 2, height / 2);
@@ -53,6 +59,7 @@ private PImage start;
 private PImage finish;
 private boolean hasStart = false;
 private int numPassedRoom = 0;
+// Array that contains four main windows the game has.
 private GameSystem[] gameSystems = new GameSystem[] { new Hall(), new CarRacing(), 
   new SaveKira(), new MeaningOfGame() };
 private KeyInput keyInput = new KeyInput();

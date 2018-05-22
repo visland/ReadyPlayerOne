@@ -1,3 +1,6 @@
+/**
+ * Manages user's key input.
+ */
 class KeyInput {
   /**
    * @param pressed
@@ -35,4 +38,3 @@ class KeyInput {
   public boolean isRightPressed = false;
   public boolean isSpacePressed = false;
 }
-

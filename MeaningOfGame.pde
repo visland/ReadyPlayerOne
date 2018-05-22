@@ -1,3 +1,6 @@
+/**
+ * The third game : eating snacks to get to the key.
+ */
 final class MeaningOfGame extends GameSystem {
   @Override
   public void setup() {
@@ -9,16 +12,20 @@ final class MeaningOfGame extends GameSystem {
     key.setup();
     player.setup();
   }
-
-  // Initializes player's position.
+  
+  /**
+   * Initializes player's position.
+   */
   private void initPlayerPosition() {
     float radius = (Const.KEY_INNER_RADIUS + Const.KEY_OUTER_RADIUS) / 2;
     double movingDirection = key.getMovingDirection();
     player.x = (float) (key.x - radius * Math.cos(movingDirection));
     player.y = (float) (key.y + radius * -Math.sin(movingDirection));
   }
-
-  // Resets key, player and snacks.
+  
+  /**
+   * Resets key, player and snacks.
+   */
   @Override
   protected void refreshGame() {
     // Initializes key position
@@ -27,7 +34,11 @@ final class MeaningOfGame extends GameSystem {
     initPlayerPosition();
     initSnacks();
   }
-
+  
+  /**
+   * Returns {true} if the user move out of the big circle
+   * or touch the key before he/she eat all the snacks.
+   */
   @Override
   protected boolean fail() {
     return (player.isCollision(key) && !snacks.isEmpty()) ||
@@ -53,6 +64,7 @@ final class MeaningOfGame extends GameSystem {
   protected void update() {
     key.update();
     player.update();
+    // A snack disappears when the player eats it.
     for (int i = snacks.size() - 1; i >= 0; -- i) {
       if (player.isCollision(snacks.get(i))) {
         snacks.remove(i);
@@ -105,7 +117,6 @@ final class Key extends CollisionObject {
 
   @Override
   public void display() {
-    fill(0, 0);
     image(circle, x, y, 2 * Const.KEY_OUTER_RADIUS, 2 * Const.KEY_OUTER_RADIUS);
     image(keyImg, x, y, 2 * Const.KEY_INNER_RADIUS, 2 * Const.KEY_INNER_RADIUS);
     updateMovingDirection();
@@ -116,7 +127,7 @@ final class Key extends CollisionObject {
       // Hits the top or bottom
       movingDirection = -movingDirection;
     } else if (x - Const.KEY_OUTER_RADIUS < 0 || x + Const.KEY_OUTER_RADIUS > width) {
-      // Hits the left or right.
+      // Hits the left or right
       movingDirection = Math.PI - movingDirection;
     }
   }

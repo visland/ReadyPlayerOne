@@ -1,6 +1,9 @@
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The first game : car racing game.
+ */
 class CarRacing extends GameSystem {  
   @Override
   public void setup() {
@@ -25,6 +28,7 @@ class CarRacing extends GameSystem {
   protected void update() {
     player.update();
     updateCars();
+    // After the user escaped certain number of cars, it will show the finishing line.
     if (carNum >= CAR_NUM) {
       image(finishingLine, width / 2, height /2 );
     }
@@ -46,6 +50,7 @@ class CarRacing extends GameSystem {
   }
 
   private void updateCars() {
+    // Adds a new car to the list every 35 ticks.
     if (tick++ % TICKS_PER_CAR == 0 && carNum < CAR_NUM) {
       cars.add(new Car(0, random(height), CAR_IMGS[(int)random(0, CAR_IMGS.length)]));
       carNum++;
@@ -74,14 +79,15 @@ class CarRacing extends GameSystem {
     finishingLine = loadImage("img/game1/line.png");
   }
 
-  private int tick = 0;
   private int carNum = 0;
-  private final int CAR_NUM = 40;
-  private static final int TICKS_PER_CAR = 40;
+  private final int CAR_NUM = 35;
   private CarPlayer player;
   private List<Car> cars = new LinkedList<Car>();
   private PImage[] CAR_IMGS = new PImage[5];
   private PImage finishingLine;
+  // Initialized a car every 35 ticks (when the draw() function has been run 35 times).
+  private int tick = 0;
+  private static final int TICKS_PER_CAR = 35;
 }
 
 /**
@@ -129,7 +135,8 @@ public class CarPlayer extends CollisionObject {
   public void display() {
     image(carPlayer, x, y, Const.PLAYER_LENGTH, Const.PLAYER_WIDTH);
   }
-
+  
+  // Resets the location of the player.
   public void reset() {
     x = width / 2;
     y = height / 2;

@@ -1,9 +1,10 @@
+/**
+ * Manages some constances here to avoid hard coding.
+ */
 class Const {
-  // Colors
-  public static final int BLACK = 0;
-  public static final int WHITE = 155;
-
-  // Number of screens
+  /**
+   * Number of screens
+   */
   public static final int HALL = 0;
   public static final int CAR_RACING = 1;
   public static final int SAVE_KIRA = 2;
@@ -25,7 +26,7 @@ class Const {
   public static final int NUM_BLOCK = 9;
   public static final int BLOCK_LENGTH = 70;
   public static final int STICK_WIDTH = 4;
-  public static final int SUCCEED_BAR_NUM = 3;
+  public static final int SUCCEED_BAR_NUM = 4;
 
   /**
    * Game 3

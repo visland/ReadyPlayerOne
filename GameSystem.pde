@@ -1,6 +1,13 @@
+/**
+ * Four main windows in the game. (game hall and three games)
+ */
 abstract class GameSystem {
+  /**
+   * Displays all the elements at first.
+   * Then shows begin prompt. After the user presses 's' to start, continue;
+   * If the user fails/ succeeds, show fail/ succeed prompt and stop updating.
+   */
   public void run() {
-    background(Const.WHITE);
     display();
     if (showBeginPrompt()) return;
     if (showFailPrompt()) return;
@@ -10,6 +17,10 @@ abstract class GameSystem {
     updateSucceedStatus();
   }
   
+  /**
+   * Basic method that is ran in basic setup() method.
+   * Initialized images and musics in this method.
+   */
   abstract public void setup();
   abstract protected void refreshGame();
   

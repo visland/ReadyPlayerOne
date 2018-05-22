@@ -1,9 +1,20 @@
+/**
+ * All the objects that move.
+ */
 abstract class MovingObject {
   public MovingObject(float _x, float _y) {
     x = _x;
     y = _y;
   }
-
+  
+ /**
+   * Detects the distance between two objects.
+   *
+   * @para other
+   *       another object that needed to do distance detection.
+   *
+   * Returns {the distance of two objects} .
+   */
   public float getDistance(MovingObject other) {
     return PApplet.dist(x, y, other.x, other.y);
   }

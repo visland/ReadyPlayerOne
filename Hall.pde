@@ -1,3 +1,6 @@
+/**
+ * The game hall where player can access to three different games.
+ */
 class Hall extends GameSystem {
   @Override
   public void setup() {
@@ -7,6 +10,7 @@ class Hall extends GameSystem {
   @Override
   public void run() {
     image(bg, width / 2, height / 2);
+    // Determines if the player enters a room successfully.
     if (keyInput.isUpPressed) {
       if (inHouse1()) {
         changePage(Const.CAR_RACING);
@@ -25,12 +29,16 @@ class Hall extends GameSystem {
   
   @Override
   protected void refreshGame() {}
+  
   @Override
   protected boolean fail() { return false; }
+  
   @Override
   protected boolean succeed() { return false; }
+  
   @Override
   protected void display() {}
+  
   @Override
   protected void update() {}
 

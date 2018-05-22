@@ -4,6 +4,7 @@
 class SaveKira extends GameSystem {  
   @Override
   public void setup() {
+    initSound();
     initBackground();
     dancer.setup();
     bar.setup();
@@ -41,6 +42,10 @@ class SaveKira extends GameSystem {
     win = loadImage("img/win2.png");
     lose = loadImage("img/lose.png");
     background = loadImage("img/game2/bg.png");
+  }
+  
+  public void initSound() {
+    bgMusic = minim.loadFile("sound/dance.mp3");
   }
   
   private Dancer dancer = new Dancer();

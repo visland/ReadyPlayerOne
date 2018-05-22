@@ -85,7 +85,7 @@ class CarRacing extends GameSystem {
   }
 
   private int carNum = 0;
-  private final int CAR_NUM = 35;
+  private final int CAR_NUM = 3;
   private CarPlayer player;
   private List<Car> cars = new LinkedList<Car>();
   private PImage[] CAR_IMGS = new PImage[5];

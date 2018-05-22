@@ -4,6 +4,7 @@
 final class MeaningOfGame extends GameSystem {
   @Override
   public void setup() {
+    initSound();
     initBackground();
     for (int i = 0; i < SNACK_IMGS.length; i++) {
       SNACK_IMGS[i] = loadImage("img/game3/" + i + ".png");
@@ -77,6 +78,10 @@ final class MeaningOfGame extends GameSystem {
     win = loadImage("img/win2.png");
     lose = loadImage("img/lose.png");
     background = loadImage("img/game3/bg.png");
+  }
+  
+  public void initSound() {
+    bgMusic = minim.loadFile("sound/key.mp3");
   }
 
   private void initSnacks() {

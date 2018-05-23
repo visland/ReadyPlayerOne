@@ -12,6 +12,9 @@ class Hall extends GameSystem {
   @Override
   public void run() {
     bgMusic.play();
+    if (numPassedRoom == 3) {
+       bgMusic. close();
+    }
     image(bg, width / 2, height / 2);
     // Determines if the player enters a room successfully.
     if (keyInput.isUpPressed) {

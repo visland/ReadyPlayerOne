@@ -7,6 +7,9 @@ public void setup() {
   colorMode(RGB, 255);
   minim = new Minim(this);
   startPage = minim.loadFile("sound/hall.mp3");
+  failMusic = minim.loadFile("sound/fail.wav");
+  victoryMusic = minim.loadFile("sound/victory.wav");
+  winMusic = minim.loadFile("sound/win.wav");
   start = loadImage("img/start.jpg");
   finish = loadImage("img/finish.png");
   // Sets up all the games.
@@ -32,6 +35,7 @@ public void draw() {
     gameSystems[currPage].run();
   }
   if (numPassedRoom == 3) {
+    victoryMusic.play();
     image(finish, width / 2, height / 2);
   }
 }
@@ -61,6 +65,9 @@ public void addPassedRoom() {
 }
 
 protected Minim minim;
+protected AudioPlayer failMusic;
+protected AudioPlayer winMusic;
+protected AudioPlayer victoryMusic;
 private AudioPlayer startPage;
 private int currPage = Const.HALL;
 private PImage start;

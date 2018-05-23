@@ -208,7 +208,7 @@ public class Bar {
   private int barNum;
   // Previous block index.
   private int prevBlockIdx = 0;
-  private float velocity = (float)2.5;
+  private float velocity = (float)1.999999;
   private int START_X = 200;
   private int START_Y = 700;
   // The X position of the stick.

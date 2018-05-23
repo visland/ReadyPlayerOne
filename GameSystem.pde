@@ -8,6 +8,10 @@ abstract class GameSystem {
    * If the user fails/ succeeds, show fail/ succeed prompt and stop updating.
    */
   public void run() {
+    // Keeps the background music looping.
+    if (!bgMusic.isPlaying()) {
+      bgMusic.rewind();
+    }
     bgMusic.play();
     display();
     if (showBeginPrompt()) return;
@@ -69,10 +73,15 @@ abstract class GameSystem {
   protected final boolean showFailPrompt() {
     boolean result = fail;
     if (result) {
+      bgMusic.pause();
+      bgMusic.rewind();
+      failMusic.play();
       image(lose, width / 2, height / 2);
       if (keyInput.isRPressed) {
         fail = false;
         refreshGame();
+        failMusic.pause();
+        failMusic.rewind();
       }
     }
     return result;
@@ -85,11 +94,15 @@ abstract class GameSystem {
    */ 
   protected final boolean showSucceedPrompt() {
     if (succeed) {
+      bgMusic.pause();
+      bgMusic.rewind();
+      winMusic.play();
       image(win, width / 2, height / 2);
       if (keyInput.isSpacePressed) {
-        bgMusic.pause();
         changePage(0);
         addPassedRoom();
+        winMusic.pause();
+        winMusic.rewind();
       }
     }
     return succeed;

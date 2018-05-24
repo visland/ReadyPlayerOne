@@ -5,6 +5,7 @@ public void setup() {
   rectMode(CENTER);
   imageMode(CENTER);
   colorMode(RGB, 255);
+  // Loads images and musics needed.
   minim = new Minim(this);
   startPage = minim.loadFile("sound/hall.mp3");
   failMusic = minim.loadFile("sound/fail.wav");
@@ -25,6 +26,9 @@ public void setup() {
  */
 public void draw() {
   if (!hasStart) {
+    if (!startPage.isPlaying()) {
+      startPage.rewind();
+    }
     startPage.play();
     image(start, width / 2, height / 2);
     if (keyInput.isSPressed) {

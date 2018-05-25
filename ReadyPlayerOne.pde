@@ -1,5 +1,4 @@
 import ddf.minim.*;
-
 public void setup() {
   size(1024, 768);
   rectMode(CENTER);
